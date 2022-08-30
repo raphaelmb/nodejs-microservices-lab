@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { randomUUID } = require("crypto");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const posts = {};
 
