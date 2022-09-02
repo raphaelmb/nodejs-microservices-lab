@@ -54,10 +54,12 @@ app.post("/events", async (req, res) => {
         },
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
   res.send({});
 });
 
-app.listen(4001, () => console.log("Listening on port 4001..."));
+app.listen(4001, () =>
+  console.log("[Comments-service] Listening on port 4001...")
+);

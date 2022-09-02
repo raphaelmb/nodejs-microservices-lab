@@ -26,7 +26,7 @@ app.post("/posts", async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
   res.status(201).send(posts[id]);
 });
@@ -36,4 +36,6 @@ app.post("/events", (req, res) => {
   res.send({});
 });
 
-app.listen(4000, () => console.log("Listening on port 4000..."));
+app.listen(4000, () =>
+  console.log("[Posts-service] Listening on port 4000...")
+);
