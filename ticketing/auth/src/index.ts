@@ -1,10 +1,9 @@
 import express from "express";
+import { router } from "./routes";
 
 const app = express();
 app.use(express.json());
 
-app.get("/api/users/currentuser", (req, res) => {
-  res.send("Hi");
-});
+app.use(router);
 
 app.listen(3000, () => console.log("[Auth] Listening on port 3000"));
