@@ -34,7 +34,7 @@ router.post(
         id: user.id,
         email: user.email,
       },
-      process.env.JWT_KEY! || "asdf"
+      process.env.JWT_KEY!
     );
 
     // Store it on session object

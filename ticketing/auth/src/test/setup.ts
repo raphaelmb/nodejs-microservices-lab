@@ -1,6 +1,11 @@
 // import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
+import request from "supertest";
 import { app } from "../app";
+
+declare global {
+  var signin: () => Promise<string[]>;
+}
 
 // let mongo: any;
 let mongoUri = "mongodb://localhost:27017/test";
@@ -8,6 +13,7 @@ let mongoUri = "mongodb://localhost:27017/test";
 jest.setTimeout(100000);
 
 beforeAll(async () => {
+  process.env.JWT_KEY = "asdf";
   // mongo = await MongoMemoryServer.create();
   // const mongoUri = await mongo.getUri();
   await mongoose.connect(mongoUri);
@@ -24,3 +30,15 @@ afterAll(async () => {
   // await mongo.stop();
   await mongoose.connection.close();
 });
+
+// Helper signin function
+global.signin = async () => {
+  const email = "test@test.com";
+  const password = "password";
+  const response = await request(app)
+    .post("/api/users/signup")
+    .send({ email, password })
+    .expect(201);
+  const cookie = response.get("Set-Cookie");
+  return cookie;
+};
