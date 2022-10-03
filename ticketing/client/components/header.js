@@ -1,21 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default ({ currentUser }) => {
   const links = [
-    !currentUser && {
-      label: "Sign Up",
-      href: "/auth/signup",
-    },
-    !currentUser && {
-      label: "Sign in",
-      href: "/auth/signin",
-    },
-    currentUser && {
-      label: "Sign out",
-      href: "/auth/signout",
-    },
+    !currentUser && { label: 'Sign Up', href: '/auth/signup' },
+    !currentUser && { label: 'Sign In', href: '/auth/signin' },
+    currentUser && { label: 'Sign Out', href: '/auth/signout' }
   ]
-    .filter((linkConfig) => linkConfig)
+    .filter(linkConfig => linkConfig)
     .map(({ label, href }) => {
       return (
         <li key={href} className="nav-item">
@@ -31,6 +22,7 @@ export default ({ currentUser }) => {
       <Link href="/">
         <a className="navbar-brand">GitTix</a>
       </Link>
+
       <div className="d-flex justify-content-end">
         <ul className="nav d-flex align-items-center">{links}</ul>
       </div>
